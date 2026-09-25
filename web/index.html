@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- FILE: jigu-app/web/index.html -->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>稽古</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="ink.css" />
+</head>
+<body>
+  <!-- 水墨背景：宣纸噪点 + 两层远山 + 山脚云雾（纯 CSS / 内联 SVG） -->
+  <div class="ink-paper" aria-hidden="true"></div>
+  <div class="ink-hills" aria-hidden="true">
+    <svg class="far" viewBox="0 0 1000 620" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="farInk" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6b6f73" stop-opacity="0.30" />
+          <stop offset="55%" stop-color="#8a8b86" stop-opacity="0.16" />
+          <stop offset="100%" stop-color="#9a998f" stop-opacity="0.04" />
+        </linearGradient>
+      </defs>
+      <path fill="url(#farInk)" d="M0,472 C40,404 74,362 106,376 C138,390 168,446 204,428
+        C240,410 262,336 302,328 C342,320 366,384 404,394 C442,404 468,344 508,338
+        C548,332 574,396 612,404 C650,412 676,352 716,346 C756,340 782,404 820,412
+        C858,420 884,368 920,362 C956,356 980,404 1000,414 L1000,620 L0,620 Z" />
+    </svg>
+    <svg class="near" viewBox="0 0 1000 620" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="nearInk" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3f4448" stop-opacity="0.42" />
+          <stop offset="45%" stop-color="#5d6063" stop-opacity="0.22" />
+          <stop offset="100%" stop-color="#7d7c74" stop-opacity="0.05" />
+        </linearGradient>
+      </defs>
+      <path fill="url(#nearInk)" d="M0,556 C46,506 82,470 124,486 C166,502 196,556 236,544
+        C276,532 306,466 350,462 C394,458 424,522 462,532 C500,542 530,478 570,472
+        C610,466 640,528 680,536 C720,544 750,486 790,480 C830,474 862,532 900,540
+        C938,548 968,502 1000,494 L1000,620 L0,620 Z" />
+    </svg>
+  </div>
+  <div class="ink-mist" aria-hidden="true"></div>
+
+  <div class="app">
+    <header class="masthead">
+      <span class="seal">稽</span>
+      <h1>稽古</h1>
+      <nav class="tabs">
+        <button id="tab-search" class="tab active" type="button">镜鉴</button>
+        <button id="tab-library" class="tab" type="button">藏书阁</button>
+      </nav>
+    </header>
+
+    <div id="status" class="statusline"><span class="pulse"></span><span>正在备书…</span></div>
+
+    <main class="main">
+      <div id="view-search">
+        <section class="scroll">
+          <div class="rod"></div>
+          <div class="scroll-body">
+            <label for="situation">陈 情</label>
+            <textarea id="situation" rows="5" spellcheck="false"
+              placeholder="写下你此刻的处境……"></textarea>
+            <div class="row">
+              <button id="go" class="seal-btn" type="button" disabled>稽古一问</button>
+              <span class="hint">Ctrl / ⌘ + Enter</span>
+            </div>
+          </div>
+          <div class="rod"></div>
+        </section>
+
+        <div id="examples" class="examples"></div>
+
+        <div id="explain-wrap" class="explain" style="display:none">
+          <button id="explain-toggle" class="link" type="button">观其解字之法</button>
+          <div id="explain-body" class="explain-body"></div>
+        </div>
+
+        <div id="results" class="results"></div>
+      </div>
+
+      <div id="view-library" style="display:none">
+        <section class="card">
+          <h2 class="sec-title">藏书阁</h2>
+          <div id="library"></div>
+        </section>
+
+        <section class="card">
+          <h2 class="sec-title">书源与校勘</h2>
+          <p class="hint mono" id="data-base"></p>
+          <div class="row">
+            <span class="hint">史料库：</span>
+            <button id="check-data" class="ghost" type="button">检查史料</button>
+            <button id="apply-data" class="ghost" type="button">更新史料</button>
+          </div>
+          <div class="row">
+            <span class="hint">程序本体：</span>
+            <button id="check-app" class="ghost" type="button">检查版本</button>
+            <button id="apply-app" class="ghost" type="button">立即更新</button>
+            <button id="open-folder" class="ghost" type="button">打开目录</button>
+          </div>
+          <div id="update-report" class="report"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

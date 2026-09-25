@@ -1,0 +1,35 @@
+== 稽古 自检 ==
+版本     : v1.6.1
+系统     : Windows 6.2.9200(8) / x64 / .NET 4.0.30319.42000
+程序目录 : D:\DSH\jigu-app\dist\稽古\
+WebView2 : 已安装 registry:153.0.4234.48
+
+--- 1. 界面资源（内存） ---
+web 资源 : 6 项
+  OK   https://jigu.local/index.html                 4637 B
+  OK   https://jigu.local/styles.css                 14250 B
+  OK   https://jigu.local/ink.css                    3286 B
+  OK   https://jigu.local/app.js                     20313 B
+  OK   https://jigu.local/app.png                    14398 B
+  OK   https://jigu.local/seed.json                  16813 B
+  OK   https://jigu.local/index.html?selftest=1      4637 B
+
+--- 2. 外置语料（corpus.json） ---
+语料文件 : D:\DSH\jigu-app\dist\稽古\corpus.json（存在）
+文档数   : 201
+索引词数 : 24356
+索引占用 : 1612 KB
+
+--- 3. C# 检索引擎 Top3 ---
+  8ms  隋唐五代·贞观政要·论任贤 / 隋唐五代·旧唐书·房玄龄传 / 种子·史记·高祖本纪
+  0ms  两宋·宋史·寇准传 / 明·明史·郑成功传 / 种子·三国志·魏书·武帝纪
+  0ms  明·明史·胡惟庸案 / 先秦秦汉·史记·秦始皇本纪 / 先秦秦汉·汉书·高帝纪
+  0ms  种子·史记·淮阴侯列传 / 先秦秦汉·史记·淮阴侯列传
+  0ms  种子·史记·高祖本纪 / 种子·贞观政要·论政体 / 先秦秦汉·史记·周本纪
+
+--- 4. 更新清单 ---
+data_version.json : 存在
+app_version.json  : 缺失（将静默检查远端）
+更新地址          : https://raw.githubusercontent.com/alephpi/24histories-data/main
+
+RESULT: SELFCHECK OK (0 fails)

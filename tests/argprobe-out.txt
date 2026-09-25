@@ -1,0 +1,10 @@
+UDF=C:\Users\12792\AppData\Local\JiguProbe127f31
+[1] OK       : (empty)
+[2] OK       : --disable-gpu --no-first-run --disable-background-timer-throttli...
+[3] OK       : --js-flags="--max-old-space-size=128 --expose-gc"
+[4] OK       : --disable-features=msWebOOUI,msPdfOOUI --no-first-run --disable-...
+[5] OK       : --disable-gpu --disk-cache-size=33554432
+[6] OK       : --disable-gpu "unclosed-quote
+[7] OK       : --disable-gpu --x="a b" --y=c
+[8] OK       : --disable-gpu;rm -rf
+PROBE-END

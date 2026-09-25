@@ -1,0 +1,4 @@
+UDF=C:\Users\12792\AppData\Local\Temp\dsh-PZbAiN\jigu-probe-1e1e97ab
+FLAGS=--no-sandbox --single-process --disable-gpu --disable-features=msWebOOUI
+CREATE=ok
+CORE=fail COMException: 服务器运行失败 (异常来自 HRESULT:0x80080005 (CO_E_SERVER_EXEC_FAILURE))

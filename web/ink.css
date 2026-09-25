@@ -1,0 +1,115 @@
+/* FILE: jigu-app/web/ink.css
+   稽古 · 水墨背景层：远山、云雾、宣纸噪点。
+   全部用 CSS 渐变与内联 SVG 生成，不依赖任何外部图片。 */
+
+/* ---------- 宣纸底：底色 + 纤维 + 噪点 ---------- */
+.ink-paper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: #f8f5ee;
+  background-image:
+    /* 细小噪点（内联 SVG，feTurbulence 生成的宣纸颗粒） */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='0.055'/></svg>"),
+    /* 纸纤维 */
+    repeating-linear-gradient(0deg, rgba(160, 140, 100, 0.030) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(160, 140, 100, 0.022) 0 1px, transparent 1px 5px),
+    /* 左上角一方淡朱砂晕 */
+    radial-gradient(760px 420px at 12% -8%, rgba(192, 57, 43, 0.05), transparent 68%);
+}
+
+/* ---------- 水墨远山（两层，营造纵深） ---------- */
+.ink-hills {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 62vh;
+  min-height: 380px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.ink-hills .far,
+.ink-hills .near {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.ink-hills .far {
+  height: 100%;
+  opacity: 0.30;
+  filter: blur(1.2px);
+}
+
+.ink-hills .near {
+  height: 84%;
+  opacity: 0.5;
+  filter: blur(0.4px);
+}
+
+/* ---------- 云雾：横向柔化的白色带，压在山脚 ---------- */
+.ink-mist {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30vh;
+  min-height: 180px;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(248, 245, 238, 0) 0%, rgba(248, 245, 238, 0.72) 55%, rgba(248, 245, 238, 0.96) 100%),
+    radial-gradient(60% 100% at 30% 100%, rgba(255, 255, 255, 0.7), transparent 70%),
+    radial-gradient(50% 100% at 75% 100%, rgba(255, 255, 255, 0.55), transparent 70%);
+}
+
+/* ---------- 内容层压在背景之上 ---------- */
+.app { position: relative; z-index: 3; }
+
+/* ---------- 印章点缀：卡片角上的小朱砂印 ---------- */
+.card, .hit-card, .advice-card, .scroll-body { position: relative; }
+
+.card::after,
+.hit-card .seal-dot,
+.advice-card .seal-dot { }
+
+.seal-corner {
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  color: var(--cinnabar);
+  border: 1.5px solid var(--cinnabar);
+  border-radius: 3px;
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 0;
+  opacity: 0.72;
+  background: rgba(192, 57, 43, 0.035);
+  user-select: none;
+}
+
+/* ---------- 卷轴按钮：深色描边 + 纸面 ---------- */
+.rod-btn {
+  position: relative;
+  border: 1px solid #8d7a56;
+  border-radius: 3px;
+  padding: 9px 28px;
+  font-family: inherit;
+  font-size: 17px;
+  letter-spacing: 0.24em;
+  color: #fdf9f0;
+  background: var(--cinnabar);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(120, 60, 40, 0.28), inset 0 0 0 1px rgba(255, 245, 230, 0.22);
+  transition: transform 0.18s ease, box-shadow 0.3s ease, background 0.3s ease;
+}

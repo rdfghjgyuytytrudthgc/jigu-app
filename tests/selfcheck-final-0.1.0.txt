@@ -1,0 +1,43 @@
+== 稽古 自检 ==
+版本     : v1.6.1
+系统     : Windows 6.2.9200(8) / x64 / .NET 4.0.30319.42000
+程序目录 : D:\programFiles\QQ\documents\jigu-app\dist\稽古\
+WebView2 : 已安装 registry:153.0.4234.48
+
+--- 1. 界面资源（内存） ---
+web 资源 : 8 项
+  OK   https://jigu.local/index.html                 4637 B
+  OK   https://jigu.local/styles.css                 14250 B
+  OK   https://jigu.local/ink.css                    3286 B
+  OK   https://jigu.local/app.js                     20912 B
+  OK   https://jigu.local/app.png                    14340 B
+  OK   https://jigu.local/seed.json                  16813 B
+  OK   https://jigu.local/index.html?selftest=1      4637 B
+
+--- 2. 外置语料（corpus.json） ---
+语料文件 : D:\programFiles\QQ\documents\jigu-app\dist\稽古\corpus.json（存在）
+文档数   : 201
+索引词数 : 44375
+索引占用 : 2920 KB
+同义词表 : 63 组（用户语言→史料主题词的桥）
+
+--- 3. C# 检索引擎 Top3（召回回归） ---
+  PASS Q1  9ms  首页示例 1  八王之乱 / 三不如：用人的自认 / 鸿门宴：错失唯一时机
+  FAIL Q2  0ms  首页示例 2  唱筹量沙 / 田单火牛阵：把恐惧变成武器 / 邓艾偷渡阴平
+       查询 : 公司规模比对手小很多，现金流吃紧，不知道该不该继续正面竞争
+       第 1 条命中词 : 对手、粮尽（同义）、军需不继（同义）
+       第 2 条命中词 : 对手、正面、军需不继（同义）
+       第 3 条命中词 : 对手、正面、军需不继（同义）
+  PASS Q3  0ms  首页示例 3  考成法与一条鞭法 / 安史之乱 / 众建诸侯而少其力
+  PASS Q4  0ms  首页示例 4  约法三章 / 水能载舟，亦能覆舟 / 武王伐纣：时机与盟约
+  PASS Q5  0ms  旧引擎用例  美芹十论与壮志难酬 / 萧何月下追韩信 / 韩信拜将：登坛之礼
+  PASS Q6  0ms  旧引擎用例  将相和 / 陈平反间，范增去楚 / 商鞅车裂：改革者的结局
+  召回用例 : 5/6 通过
+  边界输入 : 6 项已测（不抛异常、不超 3 条）
+
+--- 4. 更新清单 ---
+data_version.json : 存在
+app_version.json  : 缺失（将静默检查远端）
+更新地址          : https://raw.githubusercontent.com/alephpi/24histories-data/main
+
+RESULT: FAILURES = 1

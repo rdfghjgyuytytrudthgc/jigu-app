@@ -1,0 +1,8 @@
+
+--disable-gpu --no-first-run --disable-background-timer-throttling
+--js-flags="--max-old-space-size=128 --expose-gc"
+--disable-features=msWebOOUI,msPdfOOUI --no-first-run --disable-gpu --disable-gpu-compositing --js-flags="--max-old-space-size=128 --expose-gc" --disable-background-timer-throttling --disk-cache-size=33554432
+--disable-gpu --disk-cache-size=33554432
+--disable-gpu "unclosed-quote
+--disable-gpu --x="a b" --y=c
+--disable-gpu;rm -rf

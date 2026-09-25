@@ -1,0 +1,4 @@
+UDF=C:\Users\12792\AppData\Local\Temp\dsh-PZbAiN\jigu-probe-94032b58
+FLAGS=
+CREATE=ok
+CORE=fail COMException: 灾难性故障 (异常来自 HRESULT:0x8000FFFF (E_UNEXPECTED))

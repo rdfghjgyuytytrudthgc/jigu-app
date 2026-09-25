@@ -1,0 +1,30 @@
+# 构建产物：由 build.ps1 生成，不进版本库（源码在 src\ / web\ / resources\ 下）
+dist/
+obj/
+bin/
+src/EmbeddedAssets.g.cs
+src/InstallerPayload.g.cs
+
+# 安装/更新测试留下的产物树：每个目录里都是一份完整的应用副本（exe + DLL + 语料），
+# 合计约 34 MB，且随时可用 --extract-to / --test-update 重新生成。
+# docs\更新服务托管说明.md 里出现的 D:/test-remote 只是示例路径，不是依赖。
+test-extract/
+test-install/
+test-portable-extract/
+test-remote/
+
+# tests\ 下手工 csc 编译出来的检查程序：只保留 .cs 源码
+tests/*.exe
+# tests\ 下那几份 WebView2 DLL 是从 SDK 目录复制来的二进制，用于编译探针程序
+tests/Microsoft.Web.WebView2.*.dll
+tests/WebView2Loader.dll
+
+# 运行期日志
+*.log
+*.log.1
+
+# 编辑器 / 系统
+.vs/
+*.user
+Thumbs.db
+desktop.ini
