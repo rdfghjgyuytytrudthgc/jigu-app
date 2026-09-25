@@ -19,6 +19,12 @@ $res  = Join-Path $root "resources"
 $obj  = Join-Path $root "obj"
 $dist = Join-Path $root "dist"
 
+# --- product version: single source of truth for the whole build ---
+# Release CI reads this line to decide the tag / release name, and it is written into
+# data_version.json + app_version.json below. Bump it here and in src\Update.cs
+# (AppVer.Number) and src\Installer.cs (SetupInfo.Version) together.
+$version = "0.1.0"
+
 # --- product naming (built from code points to keep this file ASCII-only) ---
 $APP_CH  = [string][char]0x7A3D + [string][char]0x53E4          # "Ji Gu"
 $appDir  = Join-Path $dist ([string][char]0x7A3D + [string][char]0x53E4)
@@ -37,7 +43,10 @@ if (-not (Test-Path $csc)) { throw "csc.exe not found: $csc" }
 Write-Ok "csc: $csc"
 
 $wvCandidates = @(
-  # Repo-local first: on a machine that has none of the office installs below,
+  # CI / other machines: point this at an extracted Microsoft.Web.WebView2 NuGet package.
+  # Release CI sets it, so a hosted runner needs no Office install.
+  $env:JIGU_WEBVIEW2_DIR,
+  # Repo-local: on a machine that has none of the office installs below,
   # dropping the two DLLs (plus WebView2Loader.dll) into <repo>\lib makes the build work.
   (Join-Path $PSScriptRoot "lib"),
   "C:\Program Files\Microsoft OfficePLUS\4.1.0.5753\addin",
@@ -47,6 +56,7 @@ $wvCandidates = @(
 )
 $wvDir = $null
 foreach ($cand in $wvCandidates) {
+  if ([string]::IsNullOrEmpty($cand)) { continue }
   if ((Test-Path (Join-Path $cand "Microsoft.Web.WebView2.Core.dll")) -and
       (Test-Path (Join-Path $cand "Microsoft.Web.WebView2.WinForms.dll"))) { $wvDir = $cand; break }
 }
@@ -256,7 +266,7 @@ $synHash = (Get-FileHash -LiteralPath $synPath -Algorithm SHA256).Hash.ToLowerIn
 $stopPath = Join-Path $res "stopwords.json"
 $stopHash = (Get-FileHash -LiteralPath $stopPath -Algorithm SHA256).Hash.ToLowerInvariant()
 $dv = [ordered]@{
-  version = "0.1.0"
+  version = $version
   generated_at = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
   source_url = "https://github.com/alephpi/24histories-simplified-chinese"
   books = [ordered]@{ corpus = $corpusHash }
@@ -276,7 +286,7 @@ if (Test-Path $seedSrc) {
 # ---- app_version.json templates (for the developer to host) ----
 $appPkg = [string][char]0x7A3D + [string][char]0x53E4 + "-setup.exe"
 $avExample = [ordered]@{
-  version = "0.1.0"; url = ("https://example.com/jigu/" + $appPkg); sha256 = ""
+  version = $version; url = ("https://example.com/jigu/" + $appPkg); sha256 = ""
   notes = "External corpus with inverted index; dual-track hot update; OS self-adaptation."
   mandatory = $false
 }
